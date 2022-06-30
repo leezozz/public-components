@@ -1,7 +1,6 @@
-# Vue3-vite2-pinia
-使用vite + pinia搭建Vue3项目
+# public-components
+一些公用组件
 
 pnpm install
 
-
-pnpm serve
+pnpm dev
