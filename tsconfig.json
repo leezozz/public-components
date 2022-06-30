@@ -1,5 +1,13 @@
 {
   "compilerOptions": {
+
+    "declaration": false,
+    "noImplicitAny": false,
+    "removeComments": true,
+    "noLib": false,
+    "experimentalDecorators": true,
+    "forceConsistentCasingInFileNames": true,
+    
     "target": "esnext",
     "useDefineForClassFields": true,
     "module": "esnext",
@@ -9,19 +17,27 @@
     "sourceMap": true,
     "resolveJsonModule": true,
     "esModuleInterop": true,
+    "skipLibCheck": true,
+    "allowSyntheticDefaultImports": true,
     "lib": ["esnext", "dom"],
+    "types": [
+      "vite/client",
+      "jest",
+      "node"
+    ],
     "baseUrl": "./",
     "paths": {
-      "@/*": ["./src/*"],
-      "store/*": ["./src/store"],
-      "comps/*": ["./src/components"],
-      "utils/*": ["./src/utils"],
-      "modules/*": ["./src/modules/*"],
-      "router/*": ["./src/router/*"],
-      "widgets/*": ["./src/widgets/*"],
-      "mixins/*": ["./src/mixins/*"]
+      "@/*": [
+        "src/*"
+      ]
     }
   },
-  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.d.ts",
+    "src/**/*.tsx",
+    "src/**/*.vue",
+    "__tests__/**/*.ts"
+  ],
   "exclude": ["node_modules"]
 }

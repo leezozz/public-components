@@ -10,15 +10,17 @@
       xmlns="http://www.w3.org/2000/svg"
     >
       <feGaussianBlur
+        v-if="isShowShadow"
         in="SourceAlpha"
         stdDeviation="2"
       />
       <feOffset
+        v-if="isShowShadow"
         dx="1"
         dy="1"
         result="offsetblur"
       />
-      <feComponentTransfer>
+      <feComponentTransfer v-if="isShowShadow">
         <feFuncA
           type="linear"
           slope="0.2"
@@ -36,7 +38,6 @@
     </g>
   </svg>
 </template>
-
 
 <script lang='ts'>
 import { computed, defineComponent, toRefs } from 'vue'
@@ -68,12 +69,16 @@ const props = defineProps({
   disabled: {
     type: Boolean,
     default: false
+  },
+  isShowShadow: {
+    type: Boolean,
+    default: false
   }
 })
 
 const emit = defineEmits(['click'])
 
-const { 
+const {
   verticalCenter,
   cursor,
   shadow,
@@ -98,7 +103,7 @@ const handleClick = ():void => {
 }
 
 const getAttrs = () => {
-  const attrs: { filter?: String } = {}
+  const attrs: { filter?: string; } = {}
   shadow &&
   (attrs.filter = 'url(#drop-shadow)')
 
@@ -106,8 +111,6 @@ const getAttrs = () => {
 }
 
 </script>
-
-
 
 <style lang="scss" scoped>
 .icon-font {

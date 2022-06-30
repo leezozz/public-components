@@ -6,8 +6,10 @@ const path = require('path')
 export default defineConfig({
   plugins: [vue()],
 
+
   // 配置代理
   server: {
+    port: 8000,
     proxy: {
       "/api": {
         target: "https://jsonplaceholder.typicode.com",

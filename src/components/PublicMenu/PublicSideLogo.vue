@@ -1,6 +1,6 @@
 <template>
-  <div>
-
+  <div class="public-side-logo">
+    logo
   </div>
 </template>
 
@@ -11,7 +11,7 @@ import {
 } from 'vue'
 
 export default defineComponent({
- name: 'Index',
+ name: 'PublicSideLogo',
  components: {},
  props: {},
  setup () {
@@ -23,5 +23,11 @@ export default defineComponent({
 </script>
 
 <style scoped lang="scss">
-
+.public-side-logo {
+  height: 56px;
+  background-color: rgb(242, 225, 244);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 </style>

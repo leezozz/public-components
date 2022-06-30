@@ -1,6 +1,6 @@
 <template>
   <div>
-
+    这里测试菜单
   </div>
 </template>
 
@@ -11,7 +11,7 @@ import {
 } from 'vue'
 
 export default defineComponent({
- name: 'Index',
+ name: 'TestMenu',
  components: {},
  props: {},
  setup () {

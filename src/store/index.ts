@@ -1,33 +1,10 @@
-import { ComponentCustomProperties } from "@vue/runtime-core";
-import { createStore, Store } from "vuex"
-import { InjectionKey } from 'vue'
-import DemoTest from '@/modules/DemoTest/store'
+import { createPinia } from 'pinia'
+import piniaPlugins from '@/store/plugins/mounted'
 
-export type State = {
-  counter: number
-}
+const pinia = createPinia()
 
-// 创建一个 InjectionKey 
-export const key: InjectionKey<Store<State>> = Symbol()
+// import mounted from './mounted'
 
-// this.$store 强类型支持
-// 模块扩展
-declare module '@vue/runtime-core' {
-  interface ComponentCustomProperties {
-    $store: Store<State>
-  }
-}
+pinia.use(piniaPlugins)
 
-export default createStore({
-  modules: {
-    DemoTest,
-  },
-  state: {
-    counter: 333
-  },
-  mutations: {
-    add(state) {
-      state.counter++
-    }
-  }
-})
+export default pinia

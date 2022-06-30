@@ -1,15 +1,25 @@
-import axios from 'axios'
+import axios, { AxiosInstance } from 'axios'
 import Cookie from 'js-cookie'
 
-// import { camelizeKeys, decamelizeKeys } from './camelCase'
-import Router from '../router/index'
+import { camelizeKeys, decamelizeKeys } from '@/utils/camelCase'
+import Router from '@/router'
 
 // redirect error
-function errorRedirect (url) {
-  Router.push(`/${url}`)
+function errorRedirect(url: string) {
+  Router.push(`/${ url }`)
 }
+
+export interface RespData {
+  success?: boolean
+  errorCode?: number
+  error?: number | string | null
+  msg?: string
+  data?: any
+  [key: string]: any
+}
+
 // code Message
-const codeMessage = {
+export const codeMessage: any = {
   // 200: '服务器成功返回请求的数据。',
   200: 'The server successfully returned the requested data.',
   // 201: '新建或修改数据成功。',
@@ -46,13 +56,11 @@ const codeMessage = {
   504: 'Gateway Timeout.'
 }
 
-// 创建axios实例
-const service = axios.create({
-  // api 的 base_url
+// Instance for axios
+const service: AxiosInstance = axios.create({
+  // API from the environment variable
   baseURL: import.meta.env.VITE_BASE_API,
-  // baseURL: 'http://localhost:8080',
-  // 请求超时时间
-  timeout: 6000000
+  timeout: 15000
 })
 
 // request拦截器
@@ -64,10 +72,10 @@ service.interceptors.request.use(
     if (
       !(request.data instanceof FormData)
     ) {
-      // request.data = decamelizeKeys(request.data)
+      request.data = decamelizeKeys(request.data)
     }
 
-    // request.params = decamelizeKeys(request.params)
+    request.params = decamelizeKeys(request.params)
 
     /**
      * 让每个请求携带自定义 token
@@ -76,7 +84,12 @@ service.interceptors.request.use(
     if (request.url === '/login') {
       return request
     }
-    request.headers.Authorization = token
+
+    Object.defineProperty(request.headers, 'Authorization', {
+      enumerable: true,
+      value: token as string
+    })
+
     return request
   },
   error => {
@@ -97,12 +110,6 @@ service.interceptors.response.use(
      */
 
     const data = response.data
-    const msg = data.msg || ''
-    if (msg.indexOf('user not log in') !== -1 && data.error === -1) {
-      // TODO 写死的  之后要根据语言跳转
-      errorRedirect('en/login')
-      return
-    }
     Promise.resolve().then(() => {
       useResHeadersAPI(response.headers, data)
     })
@@ -114,9 +121,8 @@ service.interceptors.response.use(
       return new Promise(resolve => {
         const reader = new FileReader()
         reader.onload = () => {
-          response.data = JSON.parse(reader.result)
-          // resolve(camelizeKeys(response.data))
-          resolve(response.data)
+          response.data = JSON.parse(reader.result as string)
+          resolve(camelizeKeys(response.data))
         }
 
         reader.readAsText(response.data)
@@ -129,11 +135,7 @@ service.interceptors.response.use(
       }
     }
 
-    // return camelizeKeys(data)
-    if (data.msg === null) {
-      data.msg = 'Unknown error'
-    }
-    return data
+    return camelizeKeys(data)
   },
   error => {
     /**
@@ -164,7 +166,7 @@ service.interceptors.response.use(
   }
 )
 
-export function sleep (time = 0) {
+export function sleep(time = 0) {
   return new Promise((resolve) => {
     setTimeout(() => {
       resolve({})
@@ -172,7 +174,7 @@ export function sleep (time = 0) {
   })
 }
 
-function extractFileNameFromContentDispositionHeader (value) {
+function extractFileNameFromContentDispositionHeader(value: string) {
   const patterns = [
     /filename\*=[^']+'\w*'"([^"]+)";?/i,
     /filename\*=[^']+'\w*'([^;]+);?/i,
@@ -180,12 +182,11 @@ function extractFileNameFromContentDispositionHeader (value) {
     /filename=([^;]*);?/i
   ]
 
-  let responseFilename
+  let responseFilename: any
   patterns.some(regex => {
     responseFilename = regex.exec(value)
     return responseFilename !== null
   })
-
   if (responseFilename !== null && responseFilename.length > 1) {
     try {
       return decodeURIComponent(responseFilename[1])
@@ -197,7 +198,7 @@ function extractFileNameFromContentDispositionHeader (value) {
   return null
 }
 
-export function downloadFile (boldData, filename = 'shinewing', type) {
+export function downloadFile(boldData: any, filename = 'test-filename', type: string) {
   // TODO: https://blog.csdn.net/weixin_42142057/article/details/97655591
   const blob = boldData instanceof Blob
     ? boldData
@@ -215,10 +216,10 @@ export function downloadFile (boldData, filename = 'shinewing', type) {
   document.body.removeChild(link)
 }
 
-export function useResHeadersAPI (headers, resData) {
+export function useResHeadersAPI(headers: any, resData: any) {
   const disposition = headers['content-disposition']
   if (disposition) {
-    let filename = ''
+    let filename: any = ''
     /**
      * TODO: See
      * https://stackoverflow.com/a/40940790/13202554
@@ -232,3 +233,4 @@ export function useResHeadersAPI (headers, resData) {
 }
 
 export default service
+
