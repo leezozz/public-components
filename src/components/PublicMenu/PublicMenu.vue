@@ -83,7 +83,7 @@ import { defineComponent, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import NavigationSideLogo from '@/components/PublicMenu/PublicSideLogo.vue'
 import { menuLists } from '@/components/PublicMenu/index'
-import { findArrayTreePath, getRoutePath } from '@/components/PublicMenu/utils/index'
+import { findArrayTreePath, getRoutePath } from '../../components/PublicMenu/utils/index'
 
 export default defineComponent({
   name: 'PublicMenu',

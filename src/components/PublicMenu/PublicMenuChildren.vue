@@ -70,8 +70,9 @@ import {
   defineComponent,
   ref
 } from 'vue'
-import { menuLists } from '@/components/PublicMenu/index'
-import { findArrayTreePath, getRoutePath } from '@/components/PublicMenu/utils/index'
+
+import { menuLists } from '../../components/PublicMenu'
+import { findArrayTreePath, getRoutePath } from '../../components/PublicMenu/utils/index'
 
 export default defineComponent({
   name: 'PublicMenuChildren',

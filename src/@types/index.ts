@@ -33,4 +33,5 @@ declare global {
   type ICallBack = (res: IRequestData) => void
 }
 
-export {}
+export { }
+
