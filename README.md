@@ -3,4 +3,4 @@
 
 pnpm install
 
-pnpm dev
+pnpm serve
