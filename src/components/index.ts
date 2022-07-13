@@ -1,9 +1,9 @@
 // Vue Component Install
-// import { App } from 'vue'
 import LayoutArea from '../components/Layout/LayoutArea.vue'
 import LayoutSection from '../components/Layout/LayoutSection.vue'
 import PublicSideLogo from '../components/PublicMenu/PublicSideLogo.vue'
 import PublicMenuChildren from '../components/PublicMenu/PublicMenuChildren.vue'
+import PublicTable from '@/components/PublicTable/index.vue'
 import IconFont from '../components/IconFont/index.vue'
 
 const componentList = [
@@ -11,7 +11,8 @@ const componentList = [
   LayoutArea,
   LayoutSection,
   PublicSideLogo,
-  PublicMenuChildren
+  PublicMenuChildren,
+  PublicTable
 ]
 
 const component = {
