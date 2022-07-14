@@ -1,0 +1,89 @@
+<template>
+  <el-table-column
+    :width="tableHeaderWidth[index]"
+    :label="tableHeaderItem.name"
+    :prop="tableHeaderItem.prop"
+    v-bind="tableHeaderItem.attrs"
+  >
+    <template #default="{ row, column}">
+      <!-- 特殊渲染 -->
+      <!-- <template v-if="customColumn[column['property']]"> -->
+      <template v-if="column['property']">
+        <!-- {{ row }} -->
+        {{ column }}
+        <!-- {{ customColumn }} -->
+
+        <!-- <component
+          :is="customMap[
+            customColumn[column['property']]
+          ]"
+        > -->
+
+      </template>
+      
+      
+
+
+      <!-- 普通文本 -->
+      <template v-else>
+        {{ row[column['property']] }}
+      </template>
+    </template>
+
+  </el-table-column>
+</template>
+
+<script lang="ts">
+import {
+ defineComponent,
+ PropType,
+ ref
+} from 'vue'
+import { ITableHeader, CustomColumn } from '@/components/types'
+import ElementLink from '@/components/PublicTable/ElementLink.vue'
+
+export default defineComponent({
+ name: 'TableHeaderEdit',
+ components: {
+   ElementLink
+ },
+ props: {
+   tableHeaderData: {
+     type: Array,
+     default: () => {
+       return []
+     }
+   },
+   tableHeaderItem: {
+      type: Object as PropType<ITableHeader>,
+      default: () => ({})
+   },
+   tableHeaderWidth: {
+      type: Array as PropType<Array<number>>,
+      default: () => ([])
+    },
+    index: {
+      type: Number as PropType<number>,
+      default: () => 0
+    },
+    customColumn: {
+      type: Object as PropType<CustomColumn>,
+      default: () => ({})
+    }
+ },
+ setup () {
+
+   const customMap = {
+     link: 'ElementLink',
+   }
+
+  return {
+    customMap
+  }
+ }
+})
+</script>
+
+<style scoped lang="scss">
+
+</style>

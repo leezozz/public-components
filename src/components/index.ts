@@ -4,6 +4,7 @@ import LayoutSection from '../components/Layout/LayoutSection.vue'
 import PublicSideLogo from '../components/PublicMenu/PublicSideLogo.vue'
 import PublicMenuChildren from '../components/PublicMenu/PublicMenuChildren.vue'
 import PublicTable from '@/components/PublicTable/index.vue'
+import PublicTableEdit from '@/components/PublicTableEdit/index.vue'
 import IconFont from '../components/IconFont/index.vue'
 
 const componentList = [
@@ -12,7 +13,8 @@ const componentList = [
   LayoutSection,
   PublicSideLogo,
   PublicMenuChildren,
-  PublicTable
+  PublicTable,
+  PublicTableEdit
 ]
 
 const component = {
