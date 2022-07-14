@@ -36,15 +36,12 @@ export default defineComponent({
   ],
   setup(props: any) {
     const { proxy } = getCurrentInstance() as any
-    const a = ref(20)
     const currentPage = ref(1)
     watch(() => props.a, () => {
       console.log(props.pageSize,' props.pageSizeprops.pageSizeprops.pageSizeprops.pageSize')
     })
 
     const handleSizeChange = (val: number) => {
-      a.value = val
-      console.log(a)
       proxy.$emit('handleSizeChange', val)
     }
 
@@ -64,9 +61,7 @@ export default defineComponent({
 <style lang="scss">
 .custom-pagination {
   padding-top: 20px;
-
   :deep() {
-
     .el-pagination {
       display: flex;
     }

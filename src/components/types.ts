@@ -23,6 +23,15 @@ export interface ITableHeader {
 }
 
 
+export interface PublicTableElementProps {
+  row: any
+  prop: string
+  modelValue: string | number
+  render: () => any
+  onEvent: PublicTableElementOnEvent
+}
+
+
 export interface RenderList {
   el: string
   render?: () => any
@@ -63,4 +72,11 @@ export const PublicTableElementComponentProps = {
       return () => {}
     }
   }
+}
+
+// 自定义列
+export interface CustomColumn {
+  customType: String
+  customData?: () => any
+  customEvent?: () => any
 }
