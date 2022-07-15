@@ -67,11 +67,13 @@ export default defineComponent({
 
   // 渲染列
   const customColumn = ref({
-    el: 'link',
-    // customData
-    // customEvent
-    customData(isWarning: any, prop: any, row: any) {
-      return row.编号
+    '编号': {
+      el: 'link',
+      // customData
+      // customEvent
+      customData(isWarning: any, prop: any, row: any) {
+        // return row.编号
+      }
     }
   })
 
