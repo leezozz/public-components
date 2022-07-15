@@ -5,7 +5,7 @@
       link
       @click="handleClick()"
     >
-      {{ render?.() || modelValue }}
+      {{ customColumn?.() || modelValue }}
     </el-button>
   </div>
 </template>

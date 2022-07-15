@@ -7,23 +7,36 @@
   >
     <template #default="{ row, column}">
       <!-- 特殊渲染 -->
-      <!-- <template v-if="customColumn[column['property']]"> -->
-      <template v-if="column['property']">
+      <template v-if="customColumn[column['property']]">
+      <!-- <template v-if="column['property']"> -->
         <!-- {{ row }} -->
-        {{ column }}
+        <!-- {{ column }} -->
         <!-- {{ customColumn }} -->
+        <!-- {{ customColumn[column['property']] }} -->
 
         <!-- <component
           :is="customMap[
             customColumn[column['property']]
           ]"
-        > -->
+        /> -->
 
+
+        <component
+          :is="
+            customMap[
+              customColumn[column.property].el
+            ] || customColumn[column.property].el
+          "
+          v-model="row[column.property]"
+          :prop="column.property"
+          :row="row"
+          :style="customColumn[column.property].styles?.call({}, row[column.property], column.property, row)"
+          :customColumn="customColumn[column.property].customColumn?.bind({}, row[column.property], column.property, row)"
+          :on-event="customColumn[column.property].onEvent"
+          @click.stop
+        />
       </template>
       
-      
-
-
       <!-- 普通文本 -->
       <template v-else>
         {{ row[column['property']] }}
