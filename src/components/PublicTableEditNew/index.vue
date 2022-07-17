@@ -15,14 +15,6 @@ import {
 } from 'vue'
 import MyTable from '@/components/PublicTableEditNew/MyTable.vue'
 
-// interface TableDataType {
-//   name: string
-//   age: number
-//   gender: string
-//   math: number
-//   chinese: number
-//   index?: number | any
-// }
 
 export default defineComponent({
   name: 'PublicTableEditNew',
@@ -60,8 +52,6 @@ export default defineComponent({
       },
     ])
 
-    // const tableData: TableDataType[]= [
-    // const tableData = ref<TableDataType[]>([
     const tableData = ref([
       {
         name: '张三',
@@ -101,7 +91,6 @@ export default defineComponent({
     ])
 
 
-    // const editData = (index: any, prop: any, label: any, value: any)=> {
     const editData = (index, prop, label, value)=> {
       if (tableData.value[index][prop] !== label) {
         const cfm = window.confirm(`

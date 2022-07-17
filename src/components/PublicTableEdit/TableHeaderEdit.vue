@@ -5,23 +5,26 @@
     :prop="tableHeaderItem.prop"
     v-bind="tableHeaderItem.attrs"
   >
-    <template #default="{ row, column}">
+    <template #default="{ row, column }">
       <!-- 特殊渲染 -->
       <template v-if="customColumn[column['property']]">
-      <!-- <template v-if="column['property']"> -->
-        <!-- {{ row }} -->
-        <!-- {{ column }} -->
-        <!-- {{ customColumn }} -->
-        <!-- {{ customColumn[column['property']] }} -->
+        <!-- bind 如何执行 -->
+        <!-- 为什么是v-bind :on-event   ?  @on-event  -->
+        <component
+          :is="customMap[
+            customColumn[column['property']].el
+          ]"
+          v-model="row[column.property]"
+          :row="row"
+          :prop="column.property"
+          :style="customColumn[column.property].styles?.call({}, row[column['property']], column.property, row)"
+          :customColumn="customColumn[column.property].fun?.bind({}, row[column.property], column.property, row)"
+          :on-event="customColumn[column.property].onEvent"
+          @click.stop
+        />
+
 
         <!-- <component
-          :is="customMap[
-            customColumn[column['property']]
-          ]"
-        /> -->
-
-
-        <component
           :is="
             customMap[
               customColumn[column.property].el
@@ -34,7 +37,7 @@
           :customColumn="customColumn[column.property].customColumn?.bind({}, row[column.property], column.property, row)"
           :on-event="customColumn[column.property].onEvent"
           @click.stop
-        />
+        /> -->
       </template>
       
       <!-- 普通文本 -->

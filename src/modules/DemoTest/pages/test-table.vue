@@ -71,8 +71,16 @@ export default defineComponent({
       el: 'link',
       // customData
       // customEvent
-      customData(isWarning: any, prop: any, row: any) {
+      styles(value: any, key: any, row: any) {
+        console.log('样式啊---', value, '+++++', key, row)
+        // return 
+      },
+      fun(value: any, key: any, row: any) {
+        console.log('方法---', value, key, row)
         // return row.编号
+      },
+      onEvent() {
+        console.log('onEvent 事件')
       }
     }
   })
