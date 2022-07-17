@@ -17,6 +17,11 @@ const basicRoutesList: Array<RouteRecordRaw & CustomizeRouter> = [
     path: '/tables',
     name: 'Tables',
     component: () => import('@/modules/DemoTest/pages/test-table.vue')
+  },
+  {
+    path: '/table',
+    name: 'Table',
+    component: () => import('@/components/PublicTableEditNew/index.vue')
   }
 ]
 
